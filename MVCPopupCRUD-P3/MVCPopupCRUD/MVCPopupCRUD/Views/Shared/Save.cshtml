@@ -1,0 +1,30 @@
+﻿@model MVCPopupCRUD.Contact
+<h2>Save Contact</h2>
+@using (Html.BeginForm("Save","Home", FormMethod.Post, new{role = "form", id = "saveForm"}))
+{
+    @*here role = "form" for bootstrap design (optional) *@
+    @Html.ValidationSummary(true)
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        @Html.HiddenFor(model=>model.ContactID)
+        @Html.LabelFor(model=> model.ContactPerson)
+        @Html.TextBoxFor(model => model.ContactPerson, new { @class="form-control"})
+    </div>
+    <div class="form-group">        
+        @Html.LabelFor(model=> model.ContactNo)
+        @Html.TextBoxFor(model => model.ContactNo, new { @class="form-control"})
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model=> model.CountryID)
+        @Html.DropDownListFor(model=>model.CountryID, ViewBag.Countries as SelectList,"Select Country",new{@class = "form-control"})
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model=> model.StateID)
+        @Html.DropDownListFor(model=>model.StateID, ViewBag.States as SelectList,"Select State",new{@class = "form-control"})
+    </div>
+    <button type="submit" class="btn btn-default">Submit</button>
+    @Html.ActionLink("Back To List","Index", null, new {@style="margin-left:50px; font-weight:bold;"})
+    <div id="msg"></div>
+}
+
